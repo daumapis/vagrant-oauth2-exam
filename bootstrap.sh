@@ -32,6 +32,8 @@ cd nginx-${NGINX_VERSION}
 make && make install
 ln -s ${NGINX_PATH}-${NGINX_VERSION} ${NGINX_PATH}
 
+wget https://raw.githubusercontent.com/daumapis/vagrant-oauth2-exam/master/nginx.conf ${NGINX_PATH}/conf/nginx.conf
+
 chown -R $USER $NGINX_PATH/conf
 chown -R $USER $NGINX_PATH/html
 
