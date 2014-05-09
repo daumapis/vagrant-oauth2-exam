@@ -2,18 +2,20 @@
 
 USER=vagrant
 USERHOME=/home/vagrant
-NGINX_VERSION="1.4.7"
-NGINX_PATH=/data/program/nginx
-NODE_VERSION="0.10.28"
+PROGRAM_PATH=/data/program
+LOG_PATH=/data/logs
 
 apt-get update
 apt-get install -y build-essential curl git vim nmap
 
 chown -R $USER $USERHOME
 
-mkdir -p /data/logs /data/program
+mkdir -p ${LOG_PATH} ${PROGRAM_PATH}
 
 # install nginx
+NGINX_VERSION="1.4.7"
+NGINX_PATH=$PROGRAM_PATH/nginx
+
 apt-get install -y gcc libpcre3 libpcre3-dev zlib1g zlib1g-dev libssl-dev ntp
 cd ~
 
@@ -36,7 +38,7 @@ chown -R $USER $NGINX_PATH/html
 cd ${NGINX_PATH}
 
 # install nvm
-
+NODE_VERSION="0.10.28"
 git clone https://github.com/creationix/nvm.git /home/$USER/.nvm
 echo "source /home/$USER/.nvm/nvm.sh" >> /home/$USER/.profile
 
@@ -45,3 +47,6 @@ chown -R $USER /home/$USER
 USERDO="su - $USER sh -c"
 ${USERDO} "nvm install $NODE_VERSION"
 ${USERDO} "nvm alias default $NODE_VERSION"
+
+# install express-generator
+${USERDO} "npm install -g express-generator"

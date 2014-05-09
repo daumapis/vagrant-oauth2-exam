@@ -10,4 +10,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.hostname = "nginx-web1"
   config.vm.network :private_network, :ip => "172.16.99.99"
   config.vm.provision :shell, :path => "bootstrap.sh"
+
+  config.vm.synced_folder "../oauth-client-examples", "/data/service/oauth-client-examples"
 end
